@@ -1,23 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
-
+import {useSelector,useDispatch} from 'react-redux'
+import { incrementAsync,getdataasync } from './actions/messageaction';
 function App() {
+  const message=useSelector((state)=>{
+    return state
+  })
+  const dispatch=useDispatch()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <button onClick={()=>{
+  dispatch(incrementAsync())
+        }}>
+           Send Request
+        </button>
+        <br/>
+         {message.map((e)=><li>{e.title} {e.body}</li>)}
+
+         <button
+          
+            onClick={()=>{
+              dispatch(getdataasync())
+            }}
+         
+         >Data</button>
     </div>
   );
 }

@@ -3,13 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import reducer from './reducer/reducer';
+import {configureStore} from '@reduxjs/toolkit'
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk'
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const store=configureStore({reducer},thunk)
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>
+    </Provider>
 );
+
+console.log(store.getState())
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
